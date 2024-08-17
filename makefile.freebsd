@@ -1,8 +1,8 @@
 # -*- makefile -*-
 
 # 使用するツール類の設定
-CXX = g++
-LD = g++
+CXX = clang++
+LD = clang++
 STRIP = strip
 MKDEP = mkdep
 
