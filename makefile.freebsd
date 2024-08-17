@@ -62,6 +62,7 @@ LIBAYA5_OBJ = \
 	logexcode.o \
 	manifest.o \
 	md5c.o \
+	messages.o \
 	misc.o \
 	mt19937ar.o \
 	parser0.o \
@@ -71,6 +72,7 @@ LIBAYA5_OBJ = \
 	sysfunc.o \
 	value.o \
 	valuesub.o \
+	variable.o \
 	wsex.o \
 	posix_utils.o
 
