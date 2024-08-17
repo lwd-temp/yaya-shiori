@@ -5,6 +5,8 @@
 // written by umeici. 2004
 // 
 
+#include <algorithm>
+
 #if defined(WIN32) || defined(_WIN32_WCE)
 # include "stdafx.h"
 #endif
