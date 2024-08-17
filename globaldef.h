@@ -25,6 +25,10 @@
 #define std_shared_ptr  std::shared_ptr
 #define std_make_shared std::make_shared
 
+// freebsdでdefine nullptr 0を行うと
+// aya5.cpp:L507のloghandler_list.emplace_back(nullptr)で
+// 型不一致のエラーが出るのでdefineしない。
+
 #else
 
 #include <boost/shared_ptr.hpp>
