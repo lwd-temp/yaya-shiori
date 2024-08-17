@@ -18,6 +18,14 @@
 #ifndef _MSVC_LANG
 //C++11 or older
 
+#if __cplusplus >= 201103L
+
+#include <memory>
+
+#define std_shared_ptr  std::shared_ptr
+#define std_make_shared std::make_shared
+
+#else
 
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
@@ -26,6 +34,8 @@
 #define std_make_shared  boost::make_shared
 
 #define nullptr 0
+
+#endif // C++11
 
 #else
 
