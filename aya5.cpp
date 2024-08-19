@@ -335,7 +335,7 @@ extern "C" DLLEXPORT yaya::global_t FUNCATTRIB multi_request(long id, yaya::glob
 		return vm[0]->IsSuppress()||vm[0]->IsEmergency();
 	}
 	else {
-		return NULL;
+		return 0;
 	}
 }
 
@@ -349,7 +349,7 @@ extern "C" DLLEXPORT BOOL_TYPE FUNCATTRIB multi_CI_check_failed(long id)//?
 		return vm[id]->IsSuppress()||vm[id]->IsEmergency();
 	}
 	else {
-		return NULL;
+		return 0;
 	}
 }
 

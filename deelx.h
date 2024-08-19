@@ -26,6 +26,7 @@
 #include <limits.h>
 #include <string.h>
 #include <stdlib.h>
+#include <cstddef>
 
 extern "C" {
 typedef int (*POSIX_FUNC)(int);
