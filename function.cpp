@@ -744,9 +744,19 @@ const CValue& CFunction::GetValueRefForCalc(CCell &cell, CStatement &st, CLocalV
 		return cell.ansv();
 	}
 	case F_TAG_VARIABLE:
-		return pvm->variable().GetPtr(cell.index)->call_watcher(*pvm,cell.ansv());
+		if (pvm->variable().GetPtr(cell.index) != NULL) {
+			return pvm->variable().GetPtr(cell.index)->call_watcher(*pvm,cell.ansv());
+		}
+		else {
+			return emptyvalue;
+		}
 	case F_TAG_LOCALVARIABLE:
-		return lvar.GetPtr(cell.name)->call_watcher(*pvm,cell.ansv());
+		if (lvar.GetPtr(cell.name) != NULL) {
+			return lvar.GetPtr(cell.name)->call_watcher(*pvm,cell.ansv());
+		}
+		else {
+			return emptyvalue;
+		}
 	default:
 		pvm->logger().Error(E_E, 16, dicfilename, st.linecount);
 		return emptyvalue;
