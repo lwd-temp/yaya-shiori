@@ -119,7 +119,7 @@ void	CBasis::SetModuleName(const yaya::string_t &s,const yaya::char_t *trailer,c
  * -----------------------------------------------------------------------
  */
 #if defined(WIN32) || defined(_WIN32_WCE)
-void	CBasis::SetPath(yaya::global_t h, int len)
+void	CBasis::SetPath(yaya::global_t h, int len, bool is_utf8)
 {
 	// 取得と領域開放
 	std::string	mbpath;
@@ -127,8 +127,13 @@ void	CBasis::SetPath(yaya::global_t h, int len)
 	//GlobalFree(h); //load側で開放
 	h = NULL;
 
-	// 文字コードをUCS-2へ変換（ここでのマルチバイト文字コードはOSデフォルト）
-	Ccct::MbcsToUcs2Buf(base_path, mbpath, CHARSET_DEFAULT);
+	// 文字コードをUCS-2へ変換
+	if ( is_utf8 ) {
+		Ccct::MbcsToUcs2Buf(base_path, mbpath, CHARSET_UTF8);
+	}
+	else {
+		Ccct::MbcsToUcs2Buf(base_path, mbpath, CHARSET_DEFAULT);
+	}
 
 	//最後が\でも/でもなければ足す
 	if (base_path.length() == 0 || ( (base_path[base_path.length()-1] != L'/') && (base_path[base_path.length()-1] != L'\\') ) ) {
@@ -138,10 +143,17 @@ void	CBasis::SetPath(yaya::global_t h, int len)
 	load_path = base_path;
 }
 #elif defined(POSIX)
-void	CBasis::SetPath(yaya::global_t h, int len)
+void	CBasis::SetPath(yaya::global_t h, int len, bool is_utf8)
 {
 	// 取得と領域開放
-	base_path = widen(std::string(h, static_cast<std::string::size_type>(len)));
+	if ( is_utf8 ) {
+		std::string	mbpath;
+		mbpath.assign((char *)h, 0, len);
+		Ccct::MbcsToUcs2Buf(base_path, mbpath, CHARSET_UTF8);
+	}
+	else {
+		base_path = widen(std::string(h, static_cast<std::string::size_type>(len)));
+	}
 	//free(h); //load側で開放
 	h = NULL;
 	// スラッシュで終わってなければ付ける。
